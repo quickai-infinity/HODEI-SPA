@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hodei Spa & Masajea | Donostia</title>
+    <!-- Integración del Favicon -->
+    <link rel="icon" type="image/jpeg" href="15EUSKERA.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
         :root {
-            --color-hodei-blue: #a3d8f4; /* Azul nube suave */
-            --color-hodei-dark: #1e3a5f; /* Azul oscuro para textos */
+            --color-hodei-blue: #a3d8f4;
+            --color-hodei-dark: #1e3a5f;
         }
 
         body {
@@ -24,11 +26,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .bg-cloud {
-            background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-        }
-
-        /* Truco para quitar el fondo blanco del JPG del logo */
         .logo-blend {
             mix-blend-mode: multiply;
             filter: contrast(1.1);
@@ -52,6 +49,36 @@
         .btn-primary:hover {
             background-color: #2c5282;
         }
+
+        /* Animación para el logo trasero (efecto nube) */
+        @keyframes cloud-breathe {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            50% {
+                opacity: 0.55;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+        }
+
+        .bg-dynamic-cloud {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* El blend mode screen borra el fondo negro de la imagen jpg */
+            mix-blend-mode: screen; 
+            border-radius: 50%;
+            object-fit: cover;
+            z-index: -1;
+            pointer-events: none;
+            animation: cloud-breathe 7s infinite ease-in-out;
+            filter: blur(2px); /* Ligero desenfoque para dar aspecto de nube etérea */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -61,7 +88,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <!-- Logo integrado con blend-mode para eliminar fondo blanco -->
                     <img class="h-16 w-auto logo-blend" src="LOGO MEJOR RESOLUCION.jpg" alt="Hodei Spa Logo" onerror="this.src='https://via.placeholder.com/150x50?text=HODEI+SPA'">
                 </div>
                 <div class="hidden md:flex space-x-8">
@@ -78,27 +104,35 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-cloud overflow-hidden">
+    <!-- Hero Section (Adaptado a fondo oscuro para que la imagen dinámica funcione) -->
+    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-[#0f172a] overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <h1 class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl text-[#1e3a5f]">
-                    Te haremos sentir <br>
-                    <span class="text-blue-500 font-light italic">en las nubes</span>
-                </h1>
-                <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-light">
-                    Desconecta del estrés diario en nuestro santuario de bienestar en el corazón de Donostia. Tratamientos personalizados para cuerpo y mente.
-                </p>
-                <div class="mt-10 flex justify-center gap-4">
-                    <a href="#servicios" class="bg-white text-[#1e3a5f] border border-[#1e3a5f] px-8 py-3 rounded-full font-medium hover:bg-gray-50 transition-colors">
-                        Ver Tratamientos
-                    </a>
+            <div class="text-center max-w-3xl mx-auto relative">
+                
+                <!-- Logo circular dinámico detrás del texto -->
+                <img src="15EUSKERA.jpg" alt="Efecto Nube Logo" class="bg-dynamic-cloud w-[350px] h-[350px] md:w-[600px] md:h-[600px]">
+
+                <!-- Contenido de texto -->
+                <div class="relative z-10">
+                    <h1 class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl text-white drop-shadow-md">
+                        Te haremos sentir <br>
+                        <span class="text-blue-400 font-light italic drop-shadow-lg">en las nubes</span>
+                    </h1>
+                    <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light">
+                        Desconecta del estrés diario en nuestro santuario de bienestar en el corazón de Donostia. Tratamientos personalizados para cuerpo y mente.
+                    </p>
+                    <div class="mt-10 flex justify-center gap-4">
+                        <a href="#servicios" class="bg-transparent text-white border border-white/50 px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors backdrop-blur-sm">
+                            Ver Tratamientos
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Decoración Nubes SVG -->
-        <div class="absolute bottom-0 w-full">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        
+        <!-- Decoración Nubes SVG apuntando hacia el color de la siguiente sección (#f9fbfd) -->
+        <div class="absolute bottom-0 w-full leading-none">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block">
                 <path d="M0 120L1440 120V60C1440 60 1320 0 1080 0C840 0 720 120 480 120C240 120 120 60 0 60V120Z" fill="#f9fbfd"/>
             </svg>
         </div>
@@ -112,9 +146,8 @@
                 <p class="mt-4 text-gray-500 max-w-2xl mx-auto">Técnicas especializadas adaptadas a tus necesidades específicas. Encuentra tu equilibrio ideal.</p>
             </div>
 
-            <!-- Grid de Servicios -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
-                <!-- Los servicios se inyectan via JavaScript para mantener el HTML limpio -->
+                <!-- Los servicios se inyectan via JavaScript -->
             </div>
         </div>
     </section>
@@ -173,80 +206,19 @@
     </footer>
 
     <script>
-        // Datos de los servicios extraidos de las imagenes y enriquecidos con beneficios reales (Neuromarketing)
         const servicios = [
-            {
-                titulo: "Masaje con Piedras",
-                descripcion: "Terapia de calor penetrante mediante rocas volcánicas suaves.",
-                beneficios: ["Alivia la tensión muscular profunda", "Mejora el flujo sanguíneo", "Induce un estado de sedación y paz"],
-                icono: "fa-gem"
-            },
-            {
-                titulo: "Masaje Deportivo",
-                descripcion: "Manipulación intensa orientada a la recuperación física.",
-                beneficios: ["Previene lesiones musculares", "Acelera la eliminación de ácido láctico", "Aumenta la flexibilidad"],
-                icono: "fa-running"
-            },
-            {
-                titulo: "Masaje Anticelulítico",
-                descripcion: "Técnica vigorosa para romper nódulos de grasa y drenar toxinas.",
-                beneficios: ["Mejora la textura y firmeza de la piel", "Activa el sistema linfático", "Reduce la retención de líquidos"],
-                icono: "fa-leaf"
-            },
-            {
-                titulo: "Masaje Relajante",
-                descripcion: "Pases suaves y envolventes para calmar el sistema nervioso.",
-                beneficios: ["Reduce drásticamente el estrés y la ansiedad", "Mejora la calidad del sueño", "Libera endorfinas"],
-                icono: "fa-spa"
-            },
-            {
-                titulo: "Masaje Descontracturante",
-                descripcion: "Presión focalizada para disolver nudos y adherencias musculares.",
-                beneficios: ["Alivia el dolor crónico (cervical, lumbar)", "Corrige problemas de postura", "Devuelve la movilidad"],
-                icono: "fa-hands"
-            },
-            {
-                titulo: "Reiki Therapy",
-                descripcion: "Terapia energética japonesa mediante la imposición de manos.",
-                beneficios: ["Armoniza cuerpo, mente y espíritu", "Desbloquea emociones retenidas", "Aporta claridad mental"],
-                icono: "fa-om"
-            },
-            {
-                titulo: "Reflexología Podal",
-                descripcion: "Estimulación de puntos reflejos en los pies conectados a los órganos.",
-                beneficios: ["Mejora el funcionamiento orgánico global", "Estimula la autosanación", "Proporciona relajación inmediata"],
-                icono: "fa-shoe-prints"
-            },
-            {
-                titulo: "Masaje con Ventosas",
-                descripcion: "Terapia de succión (Cupping) para descomprimir los tejidos.",
-                beneficios: ["Aumenta exponencialmente el flujo sanguíneo local", "Reduce inflamaciones", "Libera fascias tensas"],
-                icono: "fa-circle-notch"
-            },
-            {
-                titulo: "Masaje Facial",
-                descripcion: "Técnicas lifting manuales para el rostro y cuello.",
-                beneficios: ["Tonifica la musculatura facial", "Aporta luminosidad y oxigenación", "Alivia el bruxismo y tensión mandibular"],
-                icono: "fa-smile"
-            },
-            {
-                titulo: "Masaje con Velas",
-                descripcion: "Experiencia sensorial con cera caliente de bajo punto de fusión e hidratante.",
-                beneficios: ["Nutrición extrema para la piel", "Aromaterapia profunda", "Relajación térmica envolvente"],
-                icono: "fa-fire-flame-simple"
-            },
-            {
-                titulo: "Masaje Circulatorio",
-                descripcion: "Movimientos ascendentes que favorecen el retorno venoso.",
-                beneficios: ["Combate la sensación de piernas cansadas", "Previene varices", "Estimula el flujo sanguíneo periférico"],
-                icono: "fa-heart-pulse"
-            },
-            {
-                titulo: "Masaje Champi",
-                descripcion: "Masaje tradicional hindú enfocado en cabeza, cuello y hombros.",
-                beneficios: ["Alivia cefaleas y migrañas", "Reduce la fatiga visual", "Fortalece el cuero cabelludo"],
-                icono: "fa-brain"
-            }
+            { titulo: "Masaje con Piedras", descripcion: "Terapia de calor penetrante mediante rocas volcánicas suaves.", beneficios: ["Alivia la tensión muscular profunda", "Mejora el flujo sanguíneo", "Induce un estado de sedación y paz"], icono: "fa-gem" },
+            { titulo: "Masaje Deportivo", descripcion: "Manipulación intensa orientada a la recuperación física.", beneficios: ["Previene lesiones musculares", "Acelera la eliminación de ácido láctico", "Aumenta la flexibilidad"], icono: "fa-running" },
+            { titulo: "Masaje Anticelulítico", descripcion: "Técnica vigorosa para romper nódulos de grasa y drenar toxinas.", beneficios: ["Mejora la textura y firmeza de la piel", "Activa el sistema linfático", "Reduce la retención de líquidos"], icono: "fa-leaf" },
+            { titulo: "Masaje Relajante", descripcion: "Pases suaves y envolventes para calmar el sistema nervioso.", beneficios: ["Reduce drásticamente el estrés y la ansiedad", "Mejora la calidad del sueño", "Libera endorfinas"], icono: "fa-spa" },
+            { titulo: "Masaje Descontracturante", descripcion: "Presión focalizada para disolver nudos y adherencias musculares.", beneficios: ["Alivia el dolor crónico (cervical, lumbar)", "Corrige problemas de postura", "Devuelve la movilidad"], icono: "fa-hands" },
+            { titulo: "Reiki Therapy", descripcion: "Terapia energética japonesa mediante la imposición de manos.", beneficios: ["Armoniza cuerpo, mente y espíritu", "Desbloquea emociones retenidas", "Aporta claridad mental"], icono: "fa-om" },
+            { titulo: "Reflexología Podal", descripcion: "Estimulación de puntos reflejos en los pies conectados a los órganos.", beneficios: ["Mejora el funcionamiento orgánico global", "Estimula la autosanación", "Proporciona relajación inmediata"], icono: "fa-shoe-prints" },
+            { titulo: "Masaje con Ventosas", descripcion: "Terapia de succión (Cupping) para descomprimir los tejidos.", beneficios: ["Aumenta exponencialmente el flujo sanguíneo local", "Reduce inflamaciones", "Libera fascias tensas"], icono: "fa-circle-notch" },
+            { titulo: "Masaje Facial", descripcion: "Técnicas lifting manuales para el rostro y cuello.", beneficios: ["Tonifica la musculatura facial", "Aporta luminosidad y oxigenación", "Alivia el bruxismo y tensión mandibular"], icono: "fa-smile" },
+            { titulo: "Masaje con Velas", descripcion: "Experiencia sensorial con cera caliente de bajo punto de fusión e hidratante.", beneficios: ["Nutrición extrema para la piel", "Aromaterapia profunda", "Relajación térmica envolvente"], icono: "fa-fire-flame-simple" },
+            { titulo: "Masaje Circulatorio", descripcion: "Movimientos ascendentes que favorecen el retorno venoso.", beneficios: ["Combate la sensación de piernas cansadas", "Previene varices", "Estimula el flujo sanguíneo periférico"], icono: "fa-heart-pulse" },
+            { titulo: "Masaje Champi", descripcion: "Masaje tradicional hindú enfocado en cabeza, cuello y hombros.", beneficios: ["Alivia cefaleas y migrañas", "Reduce la fatiga visual", "Fortalece el cuero cabelludo"], icono: "fa-brain" }
         ];
 
         const grid = document.getElementById('services-grid');
@@ -255,7 +227,6 @@
             const card = document.createElement('div');
             card.className = 'service-card bg-white rounded-2xl p-8 border border-gray-100 relative overflow-hidden group';
             
-            // Background decorativo sutil
             const decor = document.createElement('div');
             decor.className = 'absolute -right-8 -top-8 w-32 h-32 bg-blue-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500 ease-out z-0';
             
